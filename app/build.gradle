@@ -33,6 +33,10 @@ android {
         sourceCompatibility = 21
         targetCompatibility = 21
     }
+
+    buildFeatures{
+        viewBinding true
+    }
 }
 
 dependencies {
