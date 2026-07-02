@@ -1,5 +1,5 @@
 package com.example.core.data.network.response
 
-data class DataWrapper(
+data class DataWrapperResponse(
     val data: DataContainerResponse
 )
