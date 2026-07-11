@@ -1,18 +1,18 @@
 package com.example.marvelapp.framework.di
 
-import android.icu.util.TimeUnit
+
+import com.example.core.data.network.interceptor.AuthorizationInterception
 import com.example.marvelapp.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
-import okhttp3.internal.platform.android.AndroidLogHandler.setLevel
 import okhttp3.logging.HttpLoggingInterceptor
-import okio.Timeout
-import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.Calendar
+import java.util.TimeZone
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -30,6 +30,15 @@ object NetworkModule {
             )
 
         }
+    }
+
+    @Provides
+    fun providerAuthorizationInterceptor(): AuthorizationInterception{
+        return AuthorizationInterception(
+            publicKey = BuildConfig.PUBLIC_KEY,
+            privateKey = BuildConfig.PRIVATE_KEY,
+            calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
+        )
     }
 
     @Provides
